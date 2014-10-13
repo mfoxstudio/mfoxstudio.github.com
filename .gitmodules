@@ -1,0 +1,3 @@
+[submodule ".themes/mnml"]
+	path = .themes/mnml
+	url = https://github.com/ioveracker/mnml.git
