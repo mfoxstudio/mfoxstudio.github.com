@@ -4,7 +4,7 @@
   <title><![CDATA[MFox's Blog]]></title>
   <link href="http://mfoxstudio.github.io/atom.xml" rel="self"/>
   <link href="http://mfoxstudio.github.io/"/>
-  <updated>2014-10-14T10:42:17+08:00</updated>
+  <updated>2014-10-14T10:43:44+08:00</updated>
   <id>http://mfoxstudio.github.io/</id>
   <author>
     <name><![CDATA[yebw]]></name>
@@ -28,13 +28,13 @@
 <ol>
 <li><p>没有什么方法可以保留iOS6风格的状态栏布局，也就是说，系统状态栏始终会覆盖在你的iOS7应用上。</p></li>
 <li><p>不要把状态栏的外观(appearance)和状态栏的布局(layout)混淆起来。外观（light或者default）并不会影响到状态栏如何布局（frame/height/overlap）。同样需要注意的一点是系统的状态栏不再有任何的背景色。当API使用 <code>UIStatusBarStyleLightContontent</code> 时, 它指的是白色文字显示在一个透明的背景上。<code>UIStatusBarStyleDefault</code> 则指的是黑色文字显示在透明的背景上。</p></li>
-<li><p>状态栏的外观由两个互斥的方式控制：你可以通过代码的方式设置，或者由 <code>UIKit</code> 根据 <code>UIViewController</code> 中一些新的属性更新，其中默认的后面这种。检查你应用中 <strong><em>ViewController Based status Bar Appearance</em></strong> 对应的plist值来确认你当前使用的是哪一种方式。如果这个值是 <code>YES</code> ，那么你应用中每一个顶层视图控制器（不是那些容器视图控制器）需要重写 <code>preferredStatusBarStyle()</code> ，返回default或者是light样式。如果你设置了这个值为NO，那么你就可以使用你熟悉的 <code>UIApplication</code> 方法去控制状态栏的外观。</p></li>
+<li><p>状态栏的外观由两个互斥的方式控制：你可以通过代码的方式设置，或者由 <code>UIKit</code> 根据 <code>UIViewController</code> 中一些新的属性更新，其中默认的后面这种。检查你应用中 <em>ViewController Based status Bar Appearance</em> 对应的plist值来确认你当前使用的是哪一种方式。如果这个值是 <code>YES</code> ，那么你应用中每一个顶层视图控制器（不是那些容器视图控制器）需要重写 <code>preferredStatusBarStyle()</code> ，返回default或者是light样式。如果你设置了这个值为NO，那么你就可以使用你熟悉的 <code>UIApplication</code> 方法去控制状态栏的外观。</p></li>
 <li><p><code>UINavigationController</code> 会根据一个很诡异的约束来判断 <code>UINavigationBar</code> 的高度应该是44点还是64点。如果 <code>UINavigationController</code> 检测到其视图的顶部和 <code>UIWindow</code> 的顶部是相连的，那么它将导航栏绘制为64点的高度。如果其视图的顶部和UIWindow的顶部并不相连（哪怕只是一个点的间隔），那么它将导航栏绘制为“传统”的44点的高度。<code>UINavigationController执</code> 行这个逻辑即使这个视图控制器有多个子控制器。没有什么办法可以去避免这种行为。</p></li>
 <li><p>如果你给一个自定义的导航栏设置了一个只有44点高度的背景图，并且 <code>UINavigationController</code> 中视图的 <code>bounds</code> 和 <code>UIWindow</code> 的 <code>bounds</code> 一样（正如第4点中讨论的），那么 <code>UINavigationController</code> 将会在（0, 20, 320, 40）的位置绘制你的导航栏背景图，并在这个背景图的上方留下20点的黑色不透明空间。这个结果也许会让你觉得自己是一个聪明的程序员，成功绕过了第1点中所说的规则。但其实你错了，导航栏的高度仍旧是64点。</p></li>
 <li><p>请小心使用 <code>UIViewController</code> 的 <code>edgesForExtentLayout</code> 属性。调整 <code>edgesForExtendedLayout</code> 在大多数情况下不会有任何效果。<code>UIKit</code> 使用这个属性的唯一方式是如果你添加一个 <code>ViewController</code> 到 <code>UINavigationController</code>，这个 <code>UINavigationController</code> 会使用该属性判断其子视图控制器是否显示在导航栏或者状态栏下面。当给 <code>UINavigationController</code> 设置 <code>edgesForExtendedLayout</code> 并不会改变 <code>UINavigationController</code> 是有44还是64高度的导航栏高度。参考第4点中的处理逻辑。类似的布局逻辑同样适用于使用在工具栏或者 <code>UITabBarController</code> 的视图底部。</p></li>
 <li><p>如果你要实现的仅仅是防止你的子视图控制器显示在导航栏的底部。那么将 <code>edgesForExtendedLayout</code> 设置为 <code>UIRectEdgeNone</code>(或者至少是一个不包含<code>UIRectEdgeTop</code>的Mask)，请在这个 <code>UIViewController</code> 的生命周期内尽早设置这个值。</p></li>
-<li><p><code>UINavigaionController</code> 以及 <code>UITabBarController</code> 会尝试给Table View或者Collection Views类型的子视图添加contentInsets属性值。 这个和第4点中所提到的状态栏处理逻辑类似。有一个代码处理方式可以去避免这个情况，设置 Table View和Collection Views的 <code>automaticallyAdjustsScrollViewInsets</code> 为 <code>NO</code> （缺省为 <code>YES</code> ）。这个属性之前给 <strong>Riposte</strong> 和 <strong>Whisper</strong> 带来了一些严重问题，因为我之前是通过<code>contentInset</code>属性去控制因键盘以及工具栏移动而导致的Table View的布局改变。</p></li>
-<li><p>重申一点：并没有回归到iOS6样式的状态栏布局逻辑的方法。为了实现这个相似的效果，你可以将应用中所有的视图控制器(译者注: 应该是视图控制器中的视图)移至一个和屏幕顶部有20像素偏移的容器视图内，并在状态栏的后面留一个黑色的视图。这就是最后我在 <strong>Riposte</strong> 和 <strong>Whisper</strong> 中的使用的方法。</p></li>
+<li><p><code>UINavigaionController</code> 以及 <code>UITabBarController</code> 会尝试给Table View或者Collection Views类型的子视图添加contentInsets属性值。 这个和第4点中所提到的状态栏处理逻辑类似。有一个代码处理方式可以去避免这个情况，设置 Table View和Collection Views的 <code>automaticallyAdjustsScrollViewInsets</code> 为 <code>NO</code> （缺省为 <code>YES</code> ）。这个属性之前给 <em>Riposte</em> 和 <em>Whisper</em> 带来了一些严重问题，因为我之前是通过<code>contentInset</code>属性去控制因键盘以及工具栏移动而导致的Table View的布局改变。</p></li>
+<li><p>重申一点：并没有回归到iOS6样式的状态栏布局逻辑的方法。为了实现这个相似的效果，你可以将应用中所有的视图控制器(译者注: 应该是视图控制器中的视图)移至一个和屏幕顶部有20像素偏移的容器视图内，并在状态栏的后面留一个黑色的视图。这就是最后我在 <em>Riposte</em> 和 <em>Whisper</em> 中的使用的方法。</p></li>
 <li><p>苹果一直设法确保你不会去尝试第9点中的方法，他们希望我们能够重新设计APP使其能正确显示在状态栏下。有充足的论据，无论是用户体验还是技术原因，都说明了为什么这终究不是一个好方法。 你需要做那些对用户最好的，而不是简单的遵循平台的诡异特性。</p></li>
 </ol>
 
