@@ -1,103 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>MFox&#8217;s Blog</title>
-  <meta name="author" content="yebw">
-
-  
-  <meta name="description" content="原文链接 在为 Riposte 和 Whisper 这两个应用适配iOS7系统时，我反复遇到的一个问题是如何让应用的视图层级能够正确布局。iOS7中最麻烦的API就是那些为系统状态栏和 UINavigationController 提供的。在撰写本文时，这方面的API文档是严重不足。 &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://mfoxstudio.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="MFox's Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
-  
-
-</head>
-
-<body   class="collapse-sidebar sidebar-footer" >
-  <header role="banner">
-	<div class="header-title"><a href="/">MFox&#8217;s Blog</a></div>
-
-
-	<br><div class="header-subtitle">A blogging framework for hackers.</div>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:mfoxstudio.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-  
+  <title><![CDATA[Category: ios | MFox's Blog]]></title>
+  <link href="http://mfoxstudio.github.io/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://mfoxstudio.github.io/"/>
+  <updated>2014-10-14T10:05:34+08:00</updated>
+  <id>http://mfoxstudio.github.io/</id>
+  <author>
+    <name><![CDATA[yebw]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2014/10/14/gua-pei-ios7shang-de-zhuang-tai-lan-he-dao-hang-lan/">适配iOS7上的状态栏和导航栏</a></h1>
-      
-      
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2014-10-14T10:03:19+08:00" pubdate data-updated="true"></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://blog.jaredsinclair.com/post/61507315630/wrestling-with-status-bars-and-navigation-bars-on-ios-7">原文链接</a></p>
+  <entry>
+    <title type="html"><![CDATA[适配iOS7上的状态栏和导航栏]]></title>
+    <link href="http://mfoxstudio.github.io/blog/2014/10/14/gua-pei-ios7shang-de-zhuang-tai-lan-he-dao-hang-lan/"/>
+    <updated>2014-10-14T10:03:19+08:00</updated>
+    <id>http://mfoxstudio.github.io/blog/2014/10/14/gua-pei-ios7shang-de-zhuang-tai-lan-he-dao-hang-lan</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.jaredsinclair.com/post/61507315630/wrestling-with-status-bars-and-navigation-bars-on-ios-7">原文链接</a></p>
 
 <p>在为 <strong>Riposte</strong> 和 <strong>Whisper</strong> 这两个应用适配iOS7系统时，我反复遇到的一个问题是如何让应用的视图层级能够正确布局。iOS7中最麻烦的API就是那些为系统状态栏和 <code>UINavigationController</code> 提供的。在撰写本文时，这方面的API文档是严重不足。下文罗列了这方面的一些必要知识，给那些还在和iOS7的状态栏和视图控制器苦苦纠缠的程序员。</p>
 
@@ -114,60 +35,7 @@
 <li>苹果一直设法确保你不会去尝试第9点中的方法，他们希望我们能够重新设计APP使其能正确显示在状态栏下。有充足的论据，无论是用户体验还是技术原因，都说明了为什么这终究不是一个好方法。 你需要做那些对用户最好的，而不是简单的遵循平台的诡异特性。</li>
 </ol>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/10/14/gua-pei-ios7shang-de-zhuang-tai-lan-he-dao-hang-lan/">适配iOS7上的状态栏和导航栏</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 -  yebw <br/>
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> + <a href="https://github.com/ioveracker/mnml">mnml</a>.
-	  
-  </span>
-</p>
-
-</footer>
-  
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</feed>
