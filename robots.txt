@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://mfoxstudio.github.io/sitemap.xml 
